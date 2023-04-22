@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Paulo Andrei </title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MeuCrono</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            margin: 0;
+        }
+        
+        .meu {
+            color: #808080;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .crono {
+            color: #FF02CB;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+       .btn-resetar {
+  background-color: #FF02CB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  box-shadow: none;
+}
+      
+      .quadrado-rosa {
+            width: 300px;
+            height: 240px;
+            background-color: #FF02CB;
+            border-radius: 28px;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .quadrado-branco {
+            width: 300px;
+            height: 170px;
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .imagem {
+    width: 450px;
+    height: 125px;
+    background-image: url("https://www.shutterstock.com/image-vector/moisturization-sinks-drop-hair-porosity-260nw-2215117209.jpg");
+    background-size: contain;
+    background-position: center;
+    border-radius: 10px;
+        }
+        
+        .botoes {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+        }
+        
+        .botao {
+            width: 90px;
+            height: 40px;
+            border-radius: 20px;
+            border: none;
+            background-color: #FFFFFF;
+            color: #FF02CB;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .linha-tabela {
+            display: flex;
+            background-color: #FFD6F4;
+            width: 500px;
+            height: 40px;
+            border-radius: 20px;
+            margin-top: 20px;
+          justify-content: center;
+            align-items: center;
+        }
+        
+        .linha-tabela p {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            color: #FFFFF;
+        }
+        
+        .linha-tabela .primeira-semana {
+            width: 17%; color: black;
+        }
+        
+        .linha-tabela p:not(.primeira-semana) {
+            width: 25%; color: #FF00D9;
+        }
+    </style>
+</head>
+ <body>
+  <h1><span class="meu">Meu</span><span class="crono">Crono</span></h1>
+  <h2 style="color: #FF02CB; font-family: Heveltica; display: block; margin: 50px auto 0; text-align: center;">Como está seu cabelo hoje?</h2>
+  <div class="quadrado-rosa">
+    <div class="quadrado-branco">
+      <div class="imagem"></div>
+    </div>
+    <div class="botoes">
+      <button id="btn-acima" class="botao">Acima</button>
+      <button  id="btn-meio" class="botao">Meio</button>
+      <button id="btn-abaixo" class="botao">Abaixo</button>
+    </div>
+  </div>
+  <div class="container"></div>
+</body>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const btnAcima = document.querySelector('#btn-acima');
+  const btnMeio = document.querySelector('#btn-meio');
+  const btnAbaixo = document.querySelector('#btn-abaixo');
+  const divContainer = document.querySelector('.container');
+  const btnResetar = document.createElement('button');
+
+  btnResetar.classList.add('btn-resetar');
+  btnResetar.textContent = 'Resetar';
+  btnResetar.style.backgroundColor = '#FF02CB'; // cor de fundo do botão
+  btnResetar.style.color = '#ffffff'; // cor do texto do botão
+  let numEscolhas = 0;
+
+  btnAcima.addEventListener('click', () => {
+    if(numEscolhas < 3) {
+      const linhaTabela = document.createElement('div');
+      linhaTabela.classList.add('linha-tabela');
+
+      const primeiraSemana = document.createElement('p');
+      primeiraSemana.classList.add('primeira-semana');
+      primeiraSemana.textContent = 'Você deve fazer';
+      linhaTabela.appendChild(primeiraSemana);
+
+      const hidratacao = document.createElement('p');
+      hidratacao.textContent = 'Hidratação';
+      linhaTabela.appendChild(hidratacao);
+
+      divContainer.appendChild(linhaTabela);
+      numEscolhas++;
+
+      if(numEscolhas === 3) {
+        btnResetar.addEventListener('click', () => {
+          divContainer.innerHTML = '';
+          numEscolhas = 0;
+          divContainer.removeChild(btnResetar);
+          divContainer.appendChild(btnResetar);
+        });
+        divContainer.appendChild(btnResetar);
+      }
+    }
+  });
+
+  btnAbaixo.addEventListener('click', () => {
+  if(numEscolhas < 3) {
+    const linhaTabela = document.createElement('div');
+    linhaTabela.classList.add('linha-tabela');
+
+    const primeiraSemana = document.createElement('p');
+    primeiraSemana.classList.add('primeira-semana');
+    primeiraSemana.textContent = 'Você deve fazer';
+    linhaTabela.appendChild(primeiraSemana);
+
+    const reconstrucao = document.createElement('p');
+    reconstrucao.textContent = 'Reconstrução';
+    linhaTabela.appendChild(reconstrucao);
+
+    divContainer.appendChild(linhaTabela);
+    numEscolhas++;
+
+    if(numEscolhas === 3) {
+      btnResetar.addEventListener('click', () => {
+        divContainer.innerHTML = '';
+        numEscolhas = 0;
+        divContainer.removeChild(btnResetar);
+        divContainer.appendChild(btnResetar);
+      });
+      divContainer.appendChild(btnResetar);
+    }
+  }
+});
+
+    btnMeio.addEventListener('click', () => {
+    if(numEscolhas < 3) {
+      const linhaTabela = document.createElement('div');
+      linhaTabela.classList.add('linha-tabela');
+
+      const primeiraSemana = document.createElement('p');
+      primeiraSemana.classList.add('primeira-semana');
+      primeiraSemana.textContent = 'Você deve fazer';
+      linhaTabela.appendChild(primeiraSemana);
+
+      const hidratacao = document.createElement('p');
+      hidratacao.textContent = 'Nutrição';
+      linhaTabela.appendChild(hidratacao);
+
+      divContainer.appendChild(linhaTabela);
+      numEscolhas++;
+
+      if(numEscolhas === 3) {
+        btnResetar.addEventListener('click', () => {
+          divContainer.innerHTML = '';
+          numEscolhas = 0;
+          divContainer.removeChild(btnResetar);
+          divContainer.appendChild(btnResetar);
+        });
+        divContainer.appendChild(btnResetar);
+      }
+    }
+  });
+});
+
+  </script>
+</bobodydy>
+<!-- partial -->
+  
+</body>
+</html>
